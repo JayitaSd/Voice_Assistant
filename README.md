@@ -103,17 +103,17 @@ Processing the audio requires additional dedpendencies on Linux, MacOS and Windo
 5. Create a ".env" file at the root of your project folder. We will use this file to store our API credentials securely. This way they won't be hardcoded in the script. In this ".env" file, add your Agent ID:
 
 <p align="center">
-  <img src="media/agentID.png" alt="Agent ID" width="80%"/>
+  <img src="images/agent_id.png" alt="Agent ID" width="80%"/>
 </p>
 
 ```bash
 AGENT_ID=your_agent_id
 ```
 
-6. Go to the "Security" tab, enable the "First message" and "System prompt" overrides, and save. This will allow us to customize the assistant's first message and system prompt using Python code.
+6. Go to the "Security" tab under your created agent, enable the "First message" and "System prompt" overrides, and save. This will allow us to customize the assistant's first message and system prompt using Python code.
 
 <p align="center">
-  <img src="media/security.png" alt="Security tab" width="80%"/>
+  <img src="images/security.png" alt="Security tab" width="80%"/>
 </p>
 
 7. Click on your profile and go to "API keys". Create a new API key and copy it to your ".env" file:
@@ -125,7 +125,7 @@ API_KEY="sk_XXX...XXX"
 **Please make sure to save your ".env" file after adding the credentials.**
 
 <p align="center">
-  <img src="media/apiKeys.png" alt="API keys" width="80%"/>
+  <img src="images/api_key.png" alt="API keys" width="80%"/>
 </p>
 
 ElevenLabs is now set up and ready to be used in our Python script!
