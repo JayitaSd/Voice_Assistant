@@ -132,9 +132,59 @@ ElevenLabs is now set up and ready to be used in our Python script!
 
 **Note:** ElevenLabs works with a credit system. When you sign up, you get 10,000 free credits which amount to 15 minutes of conversation. You can buy more credits if needed.
 
+---
 
+### 6️⃣ 🛠 Fix: Replace Line 413 in conversation.py
+
+In the original code, line 413 of conversation.py tries to access:
+```text
+{"user_id": self.config.user_id} if self.config.user_id else {}
+```
+
+This assumes that the ConversationConfig object always has a user_id attribute.
+However, in newer versions of the pydantic-based configuration (and/or the ElevenLabs SDK), user_id is no longer defined in the ConversationConfig model.
+
+When self.config.user_id is accessed and doesn't exist, Python raises an AttributeError:
+```text
+AttributeError: 'ConversationConfig' object has no attribute 'user_id'
+```
+
+Because the code tries to conditionally access a missing attribute, it fails before it can even decide to use {} as a fallback.
+Replacing the line with simply {} ensures that the program does not attempt to access a non-existent attribute at all, avoiding the crash.
+
+In the ElevenLabs Python SDK, conversation.py is usually located in the package’s source folder inside your Python environment. So go to the file location mentioned below and you will find coversation.py:
+```text
+Lib/site-packages/elevenlabs/conversational_ai
+```
+
+#### Before
+
+```text
+**({"user_id": self.config.user_id} if self.config.user_id else {})
+```
+
+- ❌ Breaks if self.config.user_id is missing.
+- ❌ Depends on outdated SDK field.
+
+#### After
+
+```text
+{}
+```
+
+- ✅ Works regardless of ConversationConfig changes.
+- ✅ Avoids accessing missing attributes.
+- ✅ Maintains compatibility with newer ElevenLabs SDK versions.
 
 ---
 
 ## ▶️ Running the Voice Assistant
+
+```text
+python main.py
+```
+
+## 📄 License
+
+This project is based on [codedex](https://www.codedex.io/projects/create-a-voice-virtual-assistant-with-elevenlabs) and is licensed under the MIT License.
 
